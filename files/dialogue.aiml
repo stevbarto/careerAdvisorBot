@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- File contains the dialogue for the career advisor chatbot. -->
+
+<!-- Opening dialoge text, there is no topic set here. Any input string will start the dialogue. -->    
+<category>
+    <pattern>*</pattern>
+    <template>Hello there, are you a computer science major?</template>
+</category>
+
+<category>
+    <pattern>No</pattern>
+    <template>Thats unfortunate, it's a great degree. Would you like to learn more about computer science?
+    <think><set name="topic">POTENTIAL</set></think>
+    </template>
+</category>
+
+<category>
+    <pattern>Yes</pattern>
+    <template>Excellent, what is your name?
+    <think><set name="topic">CAREERS</set></think>
+    </template>
+</category>
+
+<!-- Topic set to careers if the user is a CS major.  This allows catch all handling of names. -->
+<topic name="CAREERS">
+
+<!-- Menu to recieve user preference of class subjects in the degree. -->
+<category>
+    <pattern>*</pattern>
+    <template>Great to meet you <set name="name"><star/></set>! Which subject is your favorite?
+    <think><set name="topic">RESULT</set></think>
+    <button>
+        <text>Algorithms and Data Structures</text>
+        <postback>xalgo</postback>
+    </button>
+    <button>
+        <text>Web Development</text>
+        <postback>xweb</postback>
+    </button>
+    <button>
+        <text>Network and Security</text>
+        <postback>xnet</postback>
+    </button>
+    <button>
+        <text>Leadership and Project Management</text>
+        <postback>xproject</postback>
+    </button>
+    <button>
+        <text>Data Management</text>
+        <postback>xdata</postback>
+    </button>
+    </template>
+</category>
+
+</topic>
+
+<!-- Catch all menu for when users try random input on the preference menu. -->
+<topic name="CATCHALL">
+
+<!-- Menu to recieve user preference of class subjects in the degree. -->
+<category>
+    <pattern>xretry</pattern>
+    <template>Thanks <get name="name"/>, which topic is your favorite?
+    <think><set name="topic">RESULT</set></think>
+    <button>
+        <text>Algorithms and Data Structures</text>
+        <postback>xalgo</postback>
+    </button>
+    <button>
+        <text>Web Development</text>
+        <postback>xweb</postback>
+    </button>
+    <button>
+        <text>Network and Security</text>
+        <postback>xnet</postback>
+    </button>
+    <button>
+        <text>Leadership and Project Management</text>
+        <postback>xproject</postback>
+    </button>
+    <button>
+        <text>Data Management</text>
+        <postback>xdata</postback>
+    </button>
+    </template>
+</category>
+
+<category>
+    <pattern>*</pattern>
+    <template>Oops, lets try that again <get name="name"/>!
+    <button>
+        <text>OK</text>
+        <postback>xretry</postback>
+    </button>
+    </template>
+</category>
+
+</topic>
+
+<!-- Topic set to result in order to display career results without looping and taking all user input as the name. -->
+<topic name="RESULT">
+
+<!-- The categories in the topic display a career suggestion based on the user preference input. -->
+<category>
+    <pattern>xalgo</pattern>
+    <template>Excellent <get name="name"/>! You might enjoy a career as a machine learning engineer!
+        <think><set name="topic">NULL</set></think>
+        <card>
+        <title>Machine Learning Engineer</title>
+        <subtitle>Information from Western Governors University career guide site.</subtitle>
+        <image>https://www.wgu.edu/content/dam/web-sites/blog-newsroom/blog/images/national/2020/june/machine-learning-jobs.jpg</image>
+        <button>
+            <text>Learn more about machine learning engineers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology/machine-learning-engineer-career.html</url>
+        </button>
+        <button>
+            <text>Explore other computer science careers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology.html</url>
+        </button>
+        </card>
+        Have a great day!
+    </template>
+</category>
+
+<category>
+    <pattern>xweb</pattern>
+    <template>Excellent <get name="name"/>! You might enjoy a career as a UX designer!
+        <think><set name="topic">NULL</set></think>
+        <card>
+        <title>UX Designer</title>
+        <subtitle>Information from Western Governors University career guide site.</subtitle>
+        <image>https://www.wgu.edu/content/dam/web-sites/blog-newsroom/blog/images/national/2022/UX-Design.jpg</image>
+        <button>
+            <text>Learn more about UX designers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology/ux-designer-career.html</url>
+        </button>
+        <button>
+            <text>Explore other computer science careers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology.html</url>
+        </button>
+        </card>
+        Have a great day!
+    </template>
+</category>
+
+<category>
+    <pattern>xnet</pattern>
+    <template>Excellent <get name="name"/>! You might enjoy a career as an IT consultant!
+        <think><set name="topic">NULL</set></think>
+        <card>
+        <title>IT Consultant</title>
+        <subtitle>Information from Western Governors University career guide site.</subtitle>
+        <image>https://www.wgu.edu/content/dam/web-sites/blog-newsroom/blog/images/national/2020/june/it-career-paths.jpg</image>
+        <button>
+            <text>Learn more about IT consultants here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology/it-consultant-career.html</url>
+        </button>
+        <button>
+            <text>Explore other computer science careers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology.html</url>
+        </button>
+        </card>
+        Have a great day!
+    </template>
+</category>
+
+<category>
+    <pattern>xproject</pattern>
+    <template>Excellent <get name="name"/>! You might enjoy a career as a certified scrum product owner!
+        <think><set name="topic">NULL</set></think>
+        <card>
+        <title>Certified Scrum Product Owner</title>
+        <subtitle>Information from Western Governors University career guide site.</subtitle>
+        <image>https://www.wgu.edu/content/dam/web-sites/mvp/information-technology/media/cspo-2.jpg</image>
+        <button>
+            <text>Learn more about certified scrum product owners here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology/certified-scrum-product-owner-career.html</url>
+        </button>
+        <button>
+            <text>Explore other computer science careers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology.html</url>
+        </button>
+        </card>
+        Have a great day!
+    </template>
+</category>
+
+<category>
+    <pattern>xdata</pattern>
+    <template>Excellent <get name="name"/>! You might enjoy a career as a data engineer!
+        <think><set name="topic">NULL</set></think>
+        <card>
+        <title>Data Engineer</title>
+        <subtitle>Information from Western Governors University career guide site.</subtitle>
+        <image>https://www.wgu.edu/content/dam/web-sites/blog-newsroom/blog/images/national/2019/august/degree-or-certificate.jpg</image>
+        <button>
+            <text>Learn more about data engineers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology/data-engineer-career.html</url>
+        </button>
+        <button>
+            <text>Explore other computer science careers here!</text>
+            <url>https://www.wgu.edu/career-guide/information-technology.html</url>
+        </button>
+        </card>
+        Have a great day!
+    </template>
+</category>
+
+<!-- Category to catch random undesired user input and redirect it toward the choices at hand. -->
+<category>
+    <pattern>*</pattern>
+    <template>Oops, try again <get name="name"/>!
+    <think><set name="topic">CATCHALL</set></think>
+    <button>
+        <text>OK</text>
+        <postback>xretry</postback>
+    </button>
+    </template>
+</category>
+
+</topic>
+
+<!-- Topic set to potential if the user is not a computer science major, options given. -->
+<topic name="POTENTIAL">
+    
+<category>
+    <pattern>Yes</pattern>
+    <template>Great! Here is some more information:
+    <think><set name="topic">NULL</set></think>
+    <card>
+        <title>WGU Computer Science</title>
+        <image>https://www.wgu.edu/content/wgu-marketing/en/online-it-degrees/computer-science/_jcr_content/root/container/container_1532687123/image.coreimg.85.800.jpeg/1659634361385/computer-science-man-woman.jpeg</image>
+        <button>
+            <text>Learn more about computer science here!</text>
+            <url>https://www.wgu.edu/online-it-degrees/computer-science.html</url>
+        </button>
+    </card>
+    Have a nice day!
+    </template>
+</category>
+
+<category>
+    <pattern>No</pattern>
+    <template>No problem, thank you for chatting with me. Have a nice day.
+    <think><set name="topic">NULL</set></think>
+    </template>
+</category>
+
+<category>
+    <pattern>*</pattern>
+    <template>
+        Focus my friend, do you want to learn more about computer science? Just say yes or no.
+    </template>
+</category>
+    
+</topic>
+</aiml>
